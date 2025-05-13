@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Урок</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Инфографика - просто!</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="lesson-container">
+        <!-- Кнопка "Назад" -->
+        <button onclick="goBack()" class="btn-back">Назад</button>
+        <h1 id="lessonTitle">Название урока</h1>
+        <div id="lessonContent">
+          <p>Здесь содержится основной текст урока.</p>
+          <img src="images/example.png" alt="Пример" class="lesson-image">
+          <ul>
+            <li>Краткие тезисы</li>
+            <li>Ключевые идеи</li>
+          </ul>
+        </div>
+        <div class="lesson-navigation">
+          <button id="nextBtn">Следующий урок →</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Все права защищены.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Функция для кнопки "Назад"
+    function goBack() {
+      window.history.back();
+    }
+
+    // Код для загрузки урока
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const lessonId = parseInt(urlParams.get("id"));
+
+      fetch("lessons.json")
+        .then(response => response.json())
+        .then(lessons => {
+          const lesson = lessons.find(l => l.id === lessonId);
+          if (lesson) {
+            document.getElementById("lessonTitle").innerText = lesson.title;
+            document.getElementById("lessonContent").innerHTML = lesson.content;
+
+            const nextBtn = document.getElementById("nextBtn");
+            if (lessonId < lessons.length) {
+              nextBtn.onclick = () => {
+                window.location.href = `lesson.html?id=${lessonId + 1}`;
+              };
+            } else {
+              nextBtn.style.display = "none"; // скрыть кнопку, если урок последний
+            }
+          } else {
+            document.getElementById("lessonTitle").innerText = "Урок не найден";
+            document.getElementById("lessonContent").innerText = "Проверь URL или ID.";
+          }
+        })
+        .catch(error => {
+          console.error("Ошибка при загрузке уроков:", error);
+        });
+    });
+  </script>
+  <script src="script.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const lessonId = urlParams.get("id");
+
+    if (!lessonId) {
+      document.getElementById("lessonTitle").innerText = "Урок не найден";
+      document.getElementById("lessonContent").innerText = "Не указан ID урока.";
+      return;
+    }
+
+    fetch(`lessons/lesson${lessonId}.json`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Файл не найден");
+        }
+        return response.json();
+      })
+      .then(lesson => {
+        document.getElementById("lessonTitle").innerText = lesson.title;
+        document.getElementById("lessonContent").innerHTML = lesson.content;
+
+        const nextBtn = document.getElementById("nextBtn");
+        nextBtn.onclick = () => {
+          window.location.href = `lesson.html?id=${parseInt(lessonId) + 1}`;
+        };
+      })
+      .catch(error => {
+        console.error("Ошибка при загрузке урока:", error);
+        document.getElementById("lessonTitle").innerText = "Урок не найден";
+        document.getElementById("lessonContent").innerText = "Проверь ID или наличие файла.";
+      });
+  });
+</script>
+</body>
+</html>
