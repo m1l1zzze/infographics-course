@@ -1,0 +1,190 @@
+/* Общие стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f4; /* Цвет фона страницы */
+  color: #333;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+h1, h2 {
+  color: #333; /* Тёмный цвет для заголовков */
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  flex: 1;
+}
+
+header {
+  background-color: #45a049; /* Прозрачный фон для шапки */
+  padding: 20px 0;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+}
+
+header .logo {
+  max-width: 150px;
+  margin-bottom: 10px;
+}
+
+main {
+  background-color: rgba(255, 255, 255, 0.9); /* Белый фон с прозрачностью */
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* Секция с уроками */
+#lessons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.lesson-item {
+  background-color: #fff;
+  margin-bottom: 30px;
+  width: 45%; /* Уроки занимают 45% ширины родительского контейнера */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.lesson-item a {
+  display: inline-block;
+  padding: 15px 25px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.lesson-item a:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.lesson-description {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+  margin-top: 10px;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+
+  header .logo {
+    max-width: 120px;
+  }
+
+  #lessons {
+    flex-direction: column;
+  }
+
+  .lesson-item {
+    width: 100%; /* На мобильных устройствах уроки занимают всю ширину */
+    margin-bottom: 20px;
+  }
+}
+
+.lesson-container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  max-width: 800px;
+}
+
+.lesson-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #2d6a4f;
+}
+
+.lesson-container p,
+.lesson-container li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.lesson-image {
+  max-width: 100%;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+.lesson-navigation {
+  margin-top: 30px;
+  text-align: right;
+}
+
+#nextBtn {
+  padding: 12px 24px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#nextBtn:hover {
+  background-color: #45a049;
+}
+
+.btn-back {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-back:hover {
+  background-color: #0056b3;
+}
+
+.lesson-image {
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+  border-radius: 8px;
+  display: block;
+}
